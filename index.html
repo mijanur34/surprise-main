@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffe4ef">
+<title>A Small Surprise for You My favorite one</title>
+
+<style>
+:root {
+  --pink: #ff85ad;
+  --light: #fff0f6;
+  --deep: #d63384;
+  --purple: #b197fc;
+  --text: #70445b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  background-image: url(/assets/hello\ kitty.jpg);
+  background-size:cover;
+  /* background: linear-gradient(145deg, #fff0f6, #ffe0ec, #f3e8ff); */
+  /* color: var(--text); */
+  text-align: center;
+  overflow-x: hidden;
+}
+
+button { font: inherit; }
+
+.hero {
+  min-height: 100svh;
+  padding: 35px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content { position: relative; z-index: 2; }
+
+.kicker {
+  display: inline-block;
+  background: white;
+  border-radius: 50px;
+  padding: 10px 17px;
+  color: var(--deep);
+  font-size: .9rem;
+  box-shadow: 0 5px 20px #d6338415;
+  margin-bottom: 22px;
+}
+
+h1 {
+  color: var(--deep);
+  font-size: clamp(2.5rem, 9vw, 5rem);
+  line-height: 1.15;
+  animation: heartbeat 2s infinite;
+}
+
+.subtitle {
+  margin: 20px auto 25px;
+  max-width: 400px;
+  line-height: 1.8;
+  font-size: 1.08rem;
+}
+
+button {
+  border: none;
+  border-radius: 50px;
+  padding: 14px 24px;
+  background: var(--deep);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 7px 20px #d6338430;
+  transition: transform .2s, box-shadow .2s;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px #d6338440;
+}
+
+button:focus-visible {
+  outline: 3px solid #70445b;
+  outline-offset: 4px;
+}
+
+.music-btn {
+  position: fixed;
+  z-index: 20;
+  top: 14px;
+  right: 14px;
+  background: white;
+  color: var(--deep);
+  padding: 11px 15px;
+  font-size: .9rem;
+}
+
+.float {
+  position: absolute;
+  bottom: -60px;
+  opacity: .75;
+  pointer-events: none;
+  animation: floatUp linear infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-115svh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+#surprise { animation: appear 1s ease; }
+.hidden { display: none !important; }
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+section.content {
+  padding: 65px 18px;
+  scroll-margin-top: 50px;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 6vw, 2.7rem);
+  color: var(--deep);
+  margin-bottom: 14px;
+}
+
+.section-desc {
+  max-width: 550px;
+  margin: 0 auto 28px;
+  line-height: 1.8;
+}
+
+.card {
+  max-width: 650px;
+  margin: 28px auto 0;
+  padding: clamp(23px, 6vw, 40px);
+  border: 2px solid white;
+  border-radius: 28px;
+  background: #ffffffbd;
+  box-shadow: 0 12px 40px #b94c7715;
+  line-height: 1.95;
+}
+
+.card p { white-space: normal; }
+
+.signature {
+  color: var(--deep);
+  font-weight: bold;
+  margin-top: 18px;
+}
+
+.gallery {
+  max-width: 900px;
+  margin: 30px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.photo {
+  background: white;
+  padding: 8px 8px 17px;
+  border-radius: 15px;
+  box-shadow: 0 7px 20px #b94c7715;
+  transform: rotate(var(--rotation));
+  transition: transform .25s;
+}
+
+.photo:hover { transform: rotate(0) translateY(-5px); }
+
+.photo img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  display: block;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #ffe0ec;
+}
+
+.photo p {
+  padding-top: 12px;
+  font-size: .9rem;
+}
+
+.wish {
+  max-width: 550px;
+  margin: 25px auto;
+}
+
+#confetti-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.confetti {
+  position: absolute;
+  top: -30px;
+  animation: fall 3s ease-in forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110svh) rotate(800deg);
+    opacity: 0;
+  }
+}
+
+footer {
+  padding: 30px 18px;
+  background: #ffffff70;
+  line-height: 2;
+  color: var(--deep);
+}
+
+@media (max-width: 650px) {
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  section.content { padding: 48px 15px; }
+  .photo { padding: 6px 6px 13px; }
+  .photo p { font-size: .8rem; }
+  .subtitle { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop preload="none">
+  <source src="/assets/Roi (instrumental - slowed and reverb).mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="musicBtn"
+        type="button" onclick="toggleMusic()"
+        aria-pressed="false">🎵 Play Music</button>
+
+<div id="confetti-layer"></div>
+
+<header class="hero">
+  <div id="floating-hearts" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="kicker">🎀 A tiny surprise 🎀</div>
+
+    <h1>Happy Birthday,<br>My Dear Shifa Akter 💗</h1>
+
+    <p class="subtitle">
+      To the girl who makes my world brighter,
+      my days sweeter, and my heart happier. 🌷
+    </p>
+
+    <button type="button" onclick="openSurprise()">
+      🎁 Open Your Surprise 🎁
+    </button>
+
+    
+  </div>
+</header>
+
+<main id="surprise" class="hidden">
+
+  <section class="content">
+    <h2 class="section-title">💌 A Letter For You 💌</h2>
+    
+    <div class="card">
+      <p>
+        To my favorite person 💗
+        <br><br>
+        Happy Birthday, Shifa 🎂🌸
+        <br><br>
+        If I could give you one thing in this world,
+        I would give you the ability to see yourself through my eyes.
+        Then you would understand just how precious, beautiful,
+        and extraordinary you are to me.
+        <br><br>
+        Your smile is my favorite view, your happiness means
+        everything to me, and every memory with you is a little
+        treasure I want to keep forever.
+        But all i get to keep is YOU. and im so grateful for that.
+        We have been together a whole year we had alots of fights countless mistakes from my side yet you always forgive me,
+        thank you a lot for always giving me the chance to be with youuuu.
+        <br><br>
+        On your special day, I wish you endless smiles, bright days,
+        peaceful nights, beautiful surprises, and dreams that
+        come true one by one,
+        May Allah grant you strength, stability, punctuality & patience.
+        Everything you want comes in the way you want.
+        And I hope I get to stand beside you
+        through all the hard time you pass. To encorrage you, to protect you, to support you, and to make you smile.
+        And  in my ability to give you all the sweetest things you deserve.
+        <br><br>
+        Again <br>
+        💖 HAPPY BIRTHDAY 💖
+      </p>
+      <p class="signature">
+        Forever by your side to support you and spoil you 😝 hehe <br><br>
+        From <br>
+        Your temporary person who admires you a lot 💕
+      </p>
+    </div>
+  </section>
+
+  <section class="content">
+    <h2 class="section-title">📸 Our Little Gallery</h2>
+    <p class="section-desc">
+      All tho you deleted everything, but luckily i still have some remaining and some new one.
+    </p>
+
+    <div class="gallery">
+      <div class="photo" style="--rotation:-2deg">
+        <img src="/assets/4.png" alt="Our favorite memory">
+        <p>My favorite memory 💗</p>
+      </div>
+      <div class="photo" style="--rotation:2deg">
+        <img src="/assets/2.png" alt="A special moment">
+        <p>Our First Meet 🌷</p>
+      </div>
+      <div class="photo" style="--rotation:-1deg">
+        <img src="/assets/3.png" alt="A happy day together">
+        <p>Our happy days ☀️</p>
+      </div>
+      <div class="photo" style="--rotation:2deg">
+        <img src="/assets/1.jpg" alt="A sweet memory">
+        <p>Just us chilling or sleeping idk lol🤣</p>
+      </div>
+      <div class="photo" style="--rotation:-2deg">
+        <img src="/assets/5.png" alt="A precious moment">
+        <p>Our Bond🧸</p>
+      </div>
+      <div class="photo" style="--rotation:1deg">
+        <img src="/assets/6.jpeg" alt="A memory to treasure">
+        <p>US💕</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <h2 class="section-title">🎂 Make a Wish!</h2>
+    <p class="section-desc">
+      Close your eyes for a moment, make your sweetest wish,
+      and tap the button. ✨
+    </p>
+
+    <div class="wish">
+      <div style="font-size:5rem;margin-bottom:25px" aria-hidden="true">
+        🧁
+      </div>
+      <button type="button" onclick="celebrate()">
+        WISH
+      </button>
+      <p id="wishMessage" aria-live="polite"
+         style="margin-top:25px;line-height:1.9"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Made just for you.</p>
+  <p>Maybe not the thing you want but this is all i can do right now.
+    Hope you like it 💖</p>
+  </p>
+</footer>
+
+<script>
+const heartsContainer = document.getElementById("floating-hearts");
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+// Floating hearts
+if (!reducedMotion) {
+  for (let i = 0; i < 24; i++) {
+    const heart = document.createElement("span");
+    heart.className = "float";
+    heart.textContent = ["💗", "💕", "🎀", "✨", "🌸"][
+      Math.floor(Math.random() * 5)
+    ];
+    heart.style.left = Math.random() * 100 + "%";
+    heart.style.animationDuration = (7 + Math.random() * 9) + "s";
+    heart.style.animationDelay = (Math.random() * 10) + "s";
+    heart.style.fontSize = (18 + Math.random() * 22) + "px";
+    heartsContainer.appendChild(heart);
+  }
+}
+
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("musicBtn");
+
+async function toggleMusic() {
+  if (music.paused) {
+    try {
+      await music.play();
+      musicBtn.textContent = "⏸ Pause Music";
+      musicBtn.setAttribute("aria-pressed", "true");
+    } catch (error) {
+      musicBtn.textContent = "⚠️ Add music/song.mp3";
+    }
+  } else {
+    music.pause();
+    musicBtn.textContent = "🎵 Play Music";
+    musicBtn.setAttribute("aria-pressed", "false");
+  }
+}
+
+music.addEventListener("ended", () => {
+  musicBtn.textContent = "🎵 Play Music";
+  musicBtn.setAttribute("aria-pressed", "false");
+});
+
+function openSurprise() {
+  const surprise = document.getElementById("surprise");
+  surprise.classList.remove("hidden");
+
+  document.querySelector(".hero button").textContent =
+    "💖 Surprise Opened!";
+
+  document.querySelector(".hero button").disabled = true;
+
+  surprise.scrollIntoView({
+    behavior: reducedMotion ? "auto" : "smooth",
+    block: "start"
+  });
+
+  celebrate();
+
+  // Music is attempted only after the visitor taps.
+  if (music.paused) toggleMusic();
+}
+
+function celebrate() {
+  const layer = document.getElementById("confetti-layer");
+  const message = document.getElementById("wishMessage");
+
+  message.textContent =
+    "💖 Surprise! You deserve every beautiful thing this world has to offer. " +
+    "Keep smiling, birthday girl! 🎂🌸 I love making you happy! 💋";
+
+  if (reducedMotion) return;
+
+  const emojis = ["💗", "🎉", "🌸", "💕", "✨", "🎀", "🎂"];
+
+  for (let i = 0; i < 65; i++) {
+    const item = document.createElement("span");
+    item.className = "confetti";
+    item.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    item.style.left = Math.random() * 100 + "%";
+    item.style.fontSize = (16 + Math.random() * 20) + "px";
+    item.style.animationDuration = (2 + Math.random() * 2) + "s";
+    item.style.animationDelay = Math.random() * 1.5 + "s";
+
+    layer.appendChild(item);
+    item.addEventListener("animationend", () => item.remove(), {
+      once: true
+    });
+  }
+}
+</script>
+
+</body>
+</html>
